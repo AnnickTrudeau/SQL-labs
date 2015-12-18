@@ -1,0 +1,70 @@
+1. Using a UNION query, create a report that lists the name and the district of the cities in Canada (code CAN) and the Netherlands (code NLD). Note that this query can be written without using a UNION. The purpose of this question is to use UNION. (city table)
+select name District from myworld.city where CountryCode="CAN"
+union
+
+select name District from myworld.city where CountryCode="NDL";
+
+
+
+2. Using an INNER JOIN..ON, create a report that list the name of cities, the country and the indepyear of all countries whose indepYear field is not null. (city and country tables).
+select city.name 
+
+from myworld.city 
+
+inner join myworld.country 
+
+on city.name=country.IndepYear
+
+where country.IndepYear is not null; 
+
+
+
+3. Rewrite the previous query using WHERE/FROM.
+select IndepYear, name from myworld.country where IndepYear is not null;
+
+
+
+4. Using a subquery, list the name of the city, the countrycode, the population and the average city population of all cities with a population less than the average population. (city table)
+select name, CountryCode, population from myworld.city where population<(select avg(population) from myworld.city);
+
+
+
+5. Using INNER JOIN ..ON, write a query that displays, for the city of Toronto, the name of the city and the head of state of its country. (city and country tables)
+select city.name
+
+from myworld.city
+
+inner join myworld.country
+
+on city.name=country.HeadOfState
+where city.name="Toronto" and country.countrycode="CAN";
+
+
+
+6. Using INNER JOIN ..ON the three tables, write a query that displays the name of the city, the city continent, the city head of state, the year of independance and the percentage of people who speaks English in the city of Toronto. (city, countrylanguage and country tables)
+select name, CountryCode, Population from myworld.city where population=(select max(population) from myworld.city);
+
+
+7. Rewrite the previous query using WHERE/FROM. 
+select name, CountryCode, population from myworld.city where population>(select avg(population) from myworld.city);
+
+
+
+10. What is wrong with the following subquery?
+SELECT name,countrycode,population,avg(population) 
+FROM city 
+WHERE population > (SELECT avg(population) FROM city)
+This ubquery only displays one city and the city's average population
+
+11. Replace the first avg(population) with (SELECT AVG(population) from city)
+What happens? Why?
+SELECT name,countrycode,population,(SELECT AVG(population) from city)
+FROM city 
+WHERE population > (SELECT avg(population) FROM city); 
+
+/*This subquery lists all the cities that have a population that is higher than the average population and displays the average population for all of them*/
+
+
+
+12. Using a subquery, list the name of the country, the continent and the life expectancy of all countries whose life expectancy is less than the average life expectancy. (country table)
+select name, Continent, LifeExpectancy from myworld.country where LifeExpectancy<(select avg(LifeExpectancy) from myworld.country);
