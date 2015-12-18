@@ -1,0 +1,32 @@
+City table:
+
+select * from world.city;
+
+select * from world.city where ID=31;
+
+select * from world.city where (CountryCode = "NLD");
+
+select distinct Name and CountryCode from world.city where Population = 20000 order by Population desc;
+
+Country table:
+
+select * from world.country;
+select Name, Region, IndepYear, Population from world.country where IndepYear=1975 and IndepYear<1991 and Population < 22000000;
+
+select Name, IndepYear from world.country where IndepYear between 1960 and 1980;
+select Name, Continent from world.country where IndepYear between 1960 and 1980;
+select Name, Continent from world.country where Continent= "Europe" or Continent= "North America" order by Continent, Name;
+
+select Name, Continent from world.country where Continent not in ("Europe", "North America") order by Continent, Name;
+
+select Name, Continent from world.country where Continent like "%America" order by Continent, Name;
+
+select Name, Continent from world.country where Name like "_____" order by Continent, Name;
+
+select Name, Continent from world.country where Name like "__y___" order by Continent, Name;
+
+select Name, Continent, IndepYear from world.country where IndepYear is Null order by Continent, Name;
+
+select Name, Continent, IndepYear from world.country where IndepYear is not Null order by Continent, Name;
+
+select * from world.country limit 5;
